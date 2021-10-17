@@ -2155,23 +2155,21 @@ shape = SubResource( 2 )
 [node name="Rotation_Helper" type="Spatial" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 4.24498, 0 )
 
+[node name="InteractionRay" type="RayCast" parent="Rotation_Helper"]
+transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -10 )
+
+[node name="look_at" type="Position3D" parent="Rotation_Helper"]
+transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 4.0552e-07, 0, 4.6386 )
+
+[node name="pickup_pos" type="Position3D" parent="Rotation_Helper"]
+transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3.74712, -1.76404, 5.6584 )
+
 [node name="Camera" type="Camera" parent="Rotation_Helper"]
 transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0 )
 current = true
 fov = 90.0
-
-[node name="Item_Holder" type="Spatial" parent="Rotation_Helper/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.584962, -0.714723, -1.12066 )
-
-[node name="look_at" type="Position3D" parent="Rotation_Helper/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3193 )
-
-[node name="pickup_pos" type="Position3D" parent="Rotation_Helper/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87356, -0.882018, -2.8292 )
-
-[node name="InteractionRay" type="RayCast" parent="Rotation_Helper/Camera"]
-enabled = true
-cast_to = Vector3( 0, 0, -10 )
 
 [node name="Model" type="Spatial" parent="Rotation_Helper"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.421, 0 )

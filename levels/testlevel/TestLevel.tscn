@@ -36,6 +36,16 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
 shape = SubResource( 3 )
 
+[node name="Cube2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.59055, -1.90835, 6.95935 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Cube2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Cube2/StaticBody"]
+shape = SubResource( 6 )
+
 [node name="Cube" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.41559, -4.93531 )
 mesh = SubResource( 4 )
@@ -44,16 +54,6 @@ material/0 = SubResource( 5 )
 [node name="StaticBody" type="StaticBody" parent="Cube"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Cube/StaticBody"]
-shape = SubResource( 6 )
-
-[node name="Cube" type="MeshInstance" parent="Cube"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.59055, -4.76198, 11.8947 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
-[node name="StaticBody" type="StaticBody" parent="Cube/Cube"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Cube/Cube/StaticBody"]
 shape = SubResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]

@@ -5,7 +5,7 @@ const GRAVITY = -24.8
 var vel = Vector3()
 var dir = Vector3()
 const MAX_SPEED = 20
-const JUMP_SPEED = 18
+const JUMP_SPEED = 10 
 const ACCEL = 4.5
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
@@ -24,7 +24,7 @@ var rotation_helper
 func _ready():
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
-	interaction_ray = $Rotation_Helper/Camera/InteractionRay
+	interaction_ray = $Rotation_Helper/InteractionRay
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

@@ -13,7 +13,7 @@ func pick_up(player):
 
 func _process(delta):
 	if picked_up:
-		set_global_transform(holder.get_node("Rotation_Helper/Camera/pickup_pos").get_global_transform())
+		set_global_transform(holder.get_node("Rotation_Helper/pickup_pos").get_global_transform())
 
 func carry():
 	$CollisionShape.set_disabled(true)
@@ -27,6 +27,6 @@ func leave():
 	self.set_mode(0)
 	picked_up = false
 
-func throw(power):
-	leave()
-	apply_impulse(Vector3(), holder.look_vector * Vector3(power, power, power))
+#func throw(power):
+#	leave()
+#	apply_impulse(Vector3(), holder.look_vector * Vector3(power, power, power))
