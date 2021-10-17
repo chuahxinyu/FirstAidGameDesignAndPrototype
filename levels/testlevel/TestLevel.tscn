@@ -57,13 +57,13 @@ material/0 = SubResource( 5 )
 shape = SubResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( -0.484214, 0, -0.87495, 0, 1, 0, 0.87495, 0, -0.484214, -7.074, 0, 0 )
+transform = Transform( -0.484214, 0, -0.87495, 0, 1, 0, 0.87495, 0, -0.484214, -5.45272, 0, 12.9393 )
 
 [node name="Ball" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9467, 6.74196, 5.36907 )
 
 [node name="Door" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.2189 )
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 16.2189 )
 
 [node name="Spatial" type="Spatial" parent="."]
 

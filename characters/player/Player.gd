@@ -28,7 +28,7 @@ func _ready():
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _process(delta):
+func _process(_delta):
 	if interaction_ray.is_colliding():
 		var object = interaction_ray.get_collider()
 		if object.has_method("pick_up"):
@@ -43,9 +43,9 @@ func _process(delta):
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
-	
+
 ## Handles all player input
-func process_input(delta):
+func process_input(_delta):
 	# Reset direction
 	dir = Vector3()
 	
@@ -99,7 +99,6 @@ func process_input(delta):
 			var object = interaction_ray.get_collider()
 			if object.has_method("interact"):
 				object.interact(self)
-	
 
 ## Handles player movement. Sends all the data necessary to the KinematicBody to
 ## move through the game world.
@@ -138,5 +137,3 @@ func _input(event):
 		var camera_rot = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
-	
-	

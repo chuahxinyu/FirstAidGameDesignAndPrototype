@@ -2121,7 +2121,7 @@ func _ready():
 #	set_max(250)
 	pass
 
-func _process(delta):
+func _process(_delta):
 #	set_value(get_parent().throw_power)
 	pass
 "
@@ -2138,7 +2138,7 @@ func _ready():
 	# Initialization here
 	pass
 
-func _process(delta):
+func _process(_delta):
 	set_text(str(Engine.get_frames_per_second()))
 "
 
