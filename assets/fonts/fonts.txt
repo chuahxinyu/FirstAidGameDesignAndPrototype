@@ -1,0 +1,17 @@
+Teko
+- h1
+- h3
+
+
+Hina Mincho
+- h2
+- tagline
+- prologue content
+
+
+Special Elite
+- narration
+- narration-light
+
+Kreon
+- p
