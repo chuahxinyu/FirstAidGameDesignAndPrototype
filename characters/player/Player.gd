@@ -20,6 +20,12 @@ var carried_object = null
 var camera
 var rotation_helper
 
+# Toggle extra information
+var show_extra = true
+var extra_text
+
+# Toggle controls information
+var show_controls = false
 
 func _ready():
 	camera = $Rotation_Helper/Camera
@@ -40,6 +46,17 @@ func _process(_delta):
 	else:
 			$HUD/interaction_text.set_text("")
 	
+	if show_extra:
+		$HUD/ExtraText.show()
+	else:
+		$HUD/ExtraText.hide()
+		
+	if show_controls:
+		$HUD/Controls.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		$HUD/Controls.hide()
+
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
@@ -75,8 +92,8 @@ func process_input(_delta):
 
 	# Capturing/Freeing the cursor ---------------------------------------------
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE \
-		and (Input.is_action_just_pressed("ui_cancel") 
-			or Input.is_action_just_pressed("click")):
+		and (Input.is_action_just_pressed("ui_cancel")):
+#			or Input.is_action_just_pressed("click")):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 	elif Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED \
@@ -99,6 +116,16 @@ func process_input(_delta):
 			var object = interaction_ray.get_collider()
 			if object.has_method("interact"):
 				object.interact(self)
+	
+	# Show/Hide Extra Text -----------------------------------------------------
+	if Input.is_action_just_pressed("show_extra_text"):
+		show_extra = !show_extra
+		
+	# Show/Hide Controls - -----------------------------------------------------
+	if Input.is_action_just_pressed("show_controls"):
+		show_controls = !show_controls
+		if show_controls == false:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 ## Handles player movement. Sends all the data necessary to the KinematicBody to
 ## move through the game world.
