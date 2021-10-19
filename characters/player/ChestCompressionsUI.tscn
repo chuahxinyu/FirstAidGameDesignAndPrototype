@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/fonts/Kreon-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/HinaMincho-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/fonts/Kreon-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/fonts/SpecialElite-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/Teko-Bold.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -44,11 +48,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="MarginContainer"]
-margin_right = 66.0
-margin_bottom = 40.0
+[node name="OptionsButton" type="Button" parent="MarginContainer"]
+margin_right = 119.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 6 )
 text = "Click Me"
-flat = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_left = 0.5

@@ -4,8 +4,9 @@ extends KinematicBody
 const GRAVITY = -24.8
 var vel = Vector3()
 var dir = Vector3()
-const MAX_SPEED = 20
-const JUMP_SPEED = 10 
+const MAX_SPEED = 10
+const SPRINT_SPEED = 20
+const SLOW_SPEED = 5
 const ACCEL = 4.5
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
@@ -26,6 +27,9 @@ var extra_text
 
 # Toggle controls information
 var show_controls = false
+
+# Toggle crouching
+var is_crouching = false
 
 func _ready():
 	camera = $Rotation_Helper/Camera
@@ -85,10 +89,13 @@ func process_input(_delta):
 	# Bases vectors are already normalized
 	dir += -cam_xform.basis.z * input_movement_vector.y
 	dir += cam_xform.basis.x * input_movement_vector.x
-	
-	# Jumping ------------------------------------------------------------------
-	if is_on_floor() and Input.is_action_just_pressed("movement_jump"):
-		vel.y = JUMP_SPEED
+
+	# Crouching ----------------------------------------------------------------
+	if Input.is_action_pressed("crouch"):
+		if is_crouching:
+			$AnimationPlayer.play_backwards("crouch")
+		else:
+			$AnimationPlayer.play("crouch")
 
 	# Capturing/Freeing the cursor ---------------------------------------------
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE \
@@ -162,5 +169,9 @@ func _input(event):
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
 		
 		var camera_rot = rotation_helper.rotation_degrees
-		camera_rot.x = clamp(camera_rot.x, -70, 70)
+		camera_rot.x = clamp(camera_rot.x, -80, 80)
 		rotation_helper.rotation_degrees = camera_rot
+
+
+func _on_crouch_animation_finished(anim_name):
+	is_crouching = !is_crouching

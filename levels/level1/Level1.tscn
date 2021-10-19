@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/models/NPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://characters/npc/NPC.tscn" type="PackedScene" id=1]
 [ext_resource path="res://interactive_objects/InteractDot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/level1/Tram.tscn" type="PackedScene" id=4]
@@ -14,16 +14,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243078, 1.35246, 31.6793 )
 transform = Transform( 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0 )
 
 [node name="NPC" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29637, -26.2452 )
-
-[node name="ShoulderDot" parent="NPC" instance=ExtResource( 2 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.436739, 4.51988, -0.0501382 )
-
-[node name="HeadDot" parent="NPC" instance=ExtResource( 2 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.018144, 5.01518, 0.391635 )
-
-[node name="ChestDot" parent="NPC" instance=ExtResource( 2 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.018144, 4.20444, 0.353311 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.371476, 1.43222, -25.1048 )
 
 [node name="InteractDot" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28987, 5.74783, 38.6039 )

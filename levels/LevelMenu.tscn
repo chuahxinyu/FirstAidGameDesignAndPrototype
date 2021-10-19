@@ -1,0 +1,154 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/LevelMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/pieces.png" type="Texture" id=2]
+[ext_resource path="res://main_menu/MenuButton.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/Teko-Bold.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 5 )
+
+[node name="Control2" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="ScrollContainer"]
+margin_right = 2000.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 2000, 800 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="ScrollContainer/Control"]
+margin_left = 142.27
+margin_top = 375.627
+margin_right = 516.27
+margin_bottom = 527.627
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+text = "PRIMARY SURVEY: DR. ABC"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+scene_to_load = "res://levels/level1/Level1.tscn"
+
+[node name="StartButton2" type="Button" parent="ScrollContainer/Control"]
+margin_left = 639.676
+margin_top = 371.0
+margin_right = 958.676
+margin_bottom = 523.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "SECONDARY SURVEY"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="StartButton3" type="Button" parent="ScrollContainer/Control"]
+margin_left = 1060.66
+margin_top = 59.4278
+margin_right = 1379.66
+margin_bottom = 211.428
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "BLEEDS"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="StartButton4" type="Button" parent="ScrollContainer/Control"]
+margin_left = 1065.41
+margin_top = 235.43
+margin_right = 1384.41
+margin_bottom = 387.43
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "TRAFFIC ACCIDENTS"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="StartButton5" type="Button" parent="ScrollContainer/Control"]
+margin_left = 1065.41
+margin_top = 418.568
+margin_right = 1384.41
+margin_bottom = 570.568
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "CHOKING"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="StartButton6" type="Button" parent="ScrollContainer/Control"]
+margin_left = 1074.93
+margin_top = 606.463
+margin_right = 1393.93
+margin_bottom = 758.463
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "FIRES"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="StartButton7" type="Button" parent="ScrollContainer/Control"]
+margin_left = 1445.96
+margin_top = 340.081
+margin_right = 1764.96
+margin_bottom = 492.081
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "..."
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
