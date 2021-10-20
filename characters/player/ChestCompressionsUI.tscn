@@ -1,38 +1,42 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/Kreon-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/HinaMincho-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/fonts/Kreon-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/fonts/SpecialElite-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/Teko-Bold.ttf" type="DynamicFontData" id=5]
-
-[sub_resource type="DynamicFont" id=6]
-size = 30
-font_data = ExtResource( 2 )
+[ext_resource path="res://characters/player/ChestCompressionsUI.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
 size = 25
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 20
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 25
+[sub_resource type="DynamicFont" id=6]
+size = 40
+outline_size = 2
+outline_color = Color( 0.160784, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [node name="ChestCompressions" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -42,41 +46,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -179.84
+margin_top = -104.3
+margin_right = 179.84
+margin_bottom = 104.3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsButton" type="Button" parent="MarginContainer"]
-margin_right = 119.0
-margin_bottom = 50.0
+[node name="Button" type="Button" parent="MarginContainer"]
+margin_right = 359.0
+margin_bottom = 208.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 1 )
 text = "Click Me"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 anchor_left = 0.5
-anchor_top = 0.35
-anchor_right = 0.513
-anchor_bottom = 0.4
-margin_left = -92.104
-margin_top = 9.26385
-margin_right = 209.256
-margin_bottom = 49.6639
+anchor_right = 0.5
+margin_left = -159.0
+margin_top = 80.0
+margin_right = 159.0
+margin_bottom = 244.24
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Body" type="RichTextLabel" parent="MarginContainer2"]
 margin_right = 318.0
-margin_bottom = 76.0
-custom_fonts/mono_font = SubResource( 1 )
-custom_fonts/bold_italics_font = SubResource( 2 )
-custom_fonts/italics_font = SubResource( 3 )
-custom_fonts/bold_font = SubResource( 4 )
-custom_fonts/normal_font = SubResource( 5 )
+margin_bottom = 164.0
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/bold_italics_font = SubResource( 3 )
+custom_fonts/italics_font = SubResource( 4 )
+custom_fonts/bold_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "BPM: 
 Count: "
@@ -85,3 +89,5 @@ Count: "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]

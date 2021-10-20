@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://characters/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/pointer.png" type="Texture" id=2]
@@ -7,9 +7,12 @@
 [ext_resource path="res://assets/fonts/Kreon-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/fonts/SpecialElite-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/fonts/Teko-Bold.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://characters/player/Quest.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/fonts/Kreon-Light.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://characters/player/time.gd" type="Script" id=10]
 [ext_resource path="res://other_menus/Controls.tscn" type="PackedScene" id=11]
+[ext_resource path="res://characters/player/FPS.gd" type="Script" id=12]
+[ext_resource path="res://characters/player/ChestCompressionsUI.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.7
@@ -18,7 +21,7 @@ height = 4.85506
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.7, 0.1, 0.7 )
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.188235, 0.0509804, 0.0509804, 0.721569 )
 border_width_left = 2
 border_width_top = 2
@@ -26,34 +29,40 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=18]
-size = 30
+[sub_resource type="DynamicFont" id=5]
+size = 24
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=19]
+[sub_resource type="DynamicFont" id=6]
 size = 20
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=7]
 size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=8]
 size = 20
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=20]
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=22]
-size = 20
+[sub_resource type="DynamicFont" id=9]
+size = 24
 font_data = ExtResource( 3 )
 
-[sub_resource type="GDScript" id=14]
+[sub_resource type="DynamicFont" id=10]
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="GDScript" id=12]
 script/source = "extends ProgressBar
 
 # class member variables go here, for example:
@@ -69,8 +78,7 @@ func _process(_delta):
 	pass
 "
 
-[sub_resource type="Animation" id=21]
-resource_name = "crouch"
+[sub_resource type="Animation" id=13]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Rotation_Helper:translation")
@@ -121,6 +129,33 @@ tracks/3/keys = {
 "values": [ 4.85506, 1.59218 ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rotation_Helper/Camera:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -180, 0 ), Vector3( -5.07166e-14, -180, 4.716 ), Vector3( -6.76194e-15, -180, -6.677 ), Vector3( -5.74564e-14, -180, 3.583 ), Vector3( -4.0048e-14, -180, -0.0499983 ), Vector3( -4.0048e-14, -180, -4.48 ), Vector3( -4.0048e-14, -180, -4.48 ), Vector3( 0, -180, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Rotation_Helper/Camera:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.66442, 0.0804269 ), Vector3( -0.135233, 1.64859, 0.0804269 ), Vector3( 0.0532674, 1.63679, 0.0804269 ), Vector3( 0.0532674, 1.63679, 0.0804269 ), Vector3( -0.0757403, 1.62668, 0.0804269 ), Vector3( 0, 1.66442, 0.0804269 ) ]
+}
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
 
@@ -146,7 +181,7 @@ transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 4.0552e
 transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3.74712, 1.25278, 5.6584 )
 
 [node name="Camera" type="Camera" parent="Rotation_Helper"]
-transform = Transform( -2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 1.66442, 0.0804269 )
+transform = Transform( -2, 0, -3.01992e-07, 0, 2, 0, 3.01992e-07, 0, -2, 0, 1.66442, 0.0804269 )
 current = true
 fov = 90.0
 
@@ -175,9 +210,10 @@ __meta__ = {
 }
 
 [node name="ExtraText" type="MarginContainer" parent="HUD"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.05
+anchor_top = 0.95
+anchor_right = 0.95
+anchor_bottom = 0.95
 margin_top = -179.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -185,15 +221,15 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="HUD/ExtraText"]
 show_behind_parent = true
-margin_right = 1280.0
+margin_right = 1152.0
 margin_bottom = 179.0
-custom_styles/panel = SubResource( 13 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD/ExtraText"]
-margin_right = 1280.0
+margin_right = 1152.0
 margin_bottom = 179.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -203,13 +239,13 @@ custom_constants/margin_bottom = 10
 [node name="ExtraTextLabel" type="RichTextLabel" parent="HUD/ExtraText/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 1270.0
+margin_right = 1142.0
 margin_bottom = 169.0
-custom_fonts/mono_font = SubResource( 17 )
-custom_fonts/bold_italics_font = SubResource( 18 )
-custom_fonts/italics_font = SubResource( 19 )
-custom_fonts/bold_font = SubResource( 15 )
-custom_fonts/normal_font = SubResource( 16 )
+custom_fonts/mono_font = SubResource( 4 )
+custom_fonts/bold_italics_font = SubResource( 5 )
+custom_fonts/italics_font = SubResource( 6 )
+custom_fonts/bold_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[b][i][u]THE MORE INFORMATION BOX[/u][/i][/b]
 [center]Since this is a prototype, many things are going to be incomplete so if you want to know more details about the game design or are just confused while playing, this box will hopefully help guide you. 
@@ -225,11 +261,226 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Checklist" type="MarginContainer" parent="HUD"]
+anchor_left = 0.01
+anchor_right = 0.1
+margin_left = 0.200001
+margin_right = 132.0
+margin_bottom = 54.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="HUD/Checklist"]
+show_behind_parent = true
+margin_right = 247.0
+margin_bottom = 103.0
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Checklist"]
+margin_right = 247.0
+margin_bottom = 103.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="Quest" type="Label" parent="HUD/Checklist/VBoxContainer"]
+margin_right = 247.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 9 )
+text = "CHECKLIST"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DangerQuest" type="VBoxContainer" parent="HUD/Checklist/VBoxContainer"]
+margin_top = 33.0
+margin_right = 247.0
+margin_bottom = 103.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="DangerTitle" type="Label" parent="HUD/Checklist/VBoxContainer/DangerQuest"]
+margin_right = 247.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 9 )
+text = "Danger"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" parent="HUD/Checklist/VBoxContainer/DangerQuest" instance=ExtResource( 8 )]
+margin_top = 33.0
+margin_right = 247.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+message = "Ensure that the situation is safe for [b]you[/b], [b]bystanders[/b] and the [b]patient[/b]."
+
+[node name="ResponseQuest" type="VBoxContainer" parent="HUD/Checklist/VBoxContainer"]
+visible = false
+margin_top = 105.0
+margin_right = 247.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="ResponseTitle" type="Label" parent="HUD/Checklist/VBoxContainer/ResponseQuest"]
+margin_right = 247.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 9 )
+text = "Response"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" parent="HUD/Checklist/VBoxContainer/ResponseQuest" instance=ExtResource( 8 )]
+margin_top = 33.0
+margin_right = 247.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+message = "Determine the patient's response level"
+
+[node name="AirwayQuest" type="VBoxContainer" parent="HUD/Checklist/VBoxContainer"]
+visible = false
+margin_top = 123.0
+margin_right = 247.0
+margin_bottom = 211.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="AirwayTitle" type="Label" parent="HUD/Checklist/VBoxContainer/AirwayQuest"]
+margin_right = 247.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 9 )
+text = "Airway"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" parent="HUD/Checklist/VBoxContainer/AirwayQuest" instance=ExtResource( 8 )]
+margin_top = 33.0
+margin_right = 247.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+message = "Open the patients airway"
+
+[node name="BreathingQuest" type="VBoxContainer" parent="HUD/Checklist/VBoxContainer"]
+visible = false
+margin_top = 153.0
+margin_right = 247.0
+margin_bottom = 271.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="BreathingTitle" type="Label" parent="HUD/Checklist/VBoxContainer/BreathingQuest"]
+margin_right = 247.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 9 )
+text = "Breathing"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" parent="HUD/Checklist/VBoxContainer/BreathingQuest" instance=ExtResource( 8 )]
+margin_top = 33.0
+margin_right = 247.0
+margin_bottom = 118.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+message = "Determine whether or not the patient is breathing normally"
+
+[node name="CallForHelpQuest" type="VBoxContainer" parent="HUD/Checklist/VBoxContainer"]
+visible = false
+margin_top = 213.0
+margin_right = 247.0
+margin_bottom = 391.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="CallForHelpTitle" type="Label" parent="HUD/Checklist/VBoxContainer/CallForHelpQuest"]
+margin_right = 247.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 9 )
+text = "Call for Help"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" parent="HUD/Checklist/VBoxContainer/CallForHelpQuest" instance=ExtResource( 8 )]
+margin_top = 33.0
+margin_right = 247.0
+margin_bottom = 178.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+message = "call for help"
+
+[node name="Circulation" type="VBoxContainer" parent="HUD/Checklist/VBoxContainer"]
+visible = false
+margin_top = 213.0
+margin_right = 247.0
+margin_bottom = 391.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="CirculationTitle" type="Label" parent="HUD/Checklist/VBoxContainer/Circulation"]
+margin_right = 247.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 9 )
+text = "Circulation"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" parent="HUD/Checklist/VBoxContainer/Circulation" instance=ExtResource( 8 )]
+margin_top = 33.0
+margin_right = 247.0
+margin_bottom = 178.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+message = "ensure that blood is flowing through the patient"
+
 [node name="FPSAndTime" type="MarginContainer" parent="HUD"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -171.0
-margin_bottom = 51.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -85.0
+margin_right = 86.0
+margin_bottom = 41.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -237,15 +488,15 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="HUD/FPSAndTime"]
 show_behind_parent = true
 margin_right = 171.0
-margin_bottom = 65.0
-custom_styles/panel = SubResource( 13 )
+margin_bottom = 41.0
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD/FPSAndTime"]
 margin_right = 171.0
-margin_bottom = 65.0
+margin_bottom = 41.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -255,14 +506,25 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 161.0
-margin_bottom = 55.0
-custom_fonts/font = SubResource( 20 )
-text = "Time Elapsed: 0:00
-FPS: 60"
-align = 2
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 10 )
+text = "Time Elapsed: 0:00"
+align = 1
 valign = 1
 autowrap = true
 script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -14.0
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -276,7 +538,7 @@ margin_left = -640.0
 margin_top = -33.5
 margin_right = 640.0
 margin_bottom = 33.5
-custom_fonts/font = SubResource( 22 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "interaction"
 align = 1
@@ -294,7 +556,7 @@ margin_right = 378.0
 margin_bottom = 51.0
 max_value = 250.0
 step = 2.0
-script = SubResource( 14 )
+script = SubResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -315,7 +577,11 @@ __meta__ = {
 [node name="Controls" parent="HUD" instance=ExtResource( 11 )]
 visible = false
 
+[node name="ChestCompressions" parent="HUD" instance=ExtResource( 13 )]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/crouch = SubResource( 21 )
+anims/crouch = SubResource( 13 )
+anims/shake = SubResource( 14 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_crouch_animation_finished"]

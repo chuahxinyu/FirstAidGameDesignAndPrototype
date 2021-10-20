@@ -9,10 +9,10 @@ func _ready():
 	
 	for button in $MenuButtons.get_children():
 		button.connect("pressed", self, "_on_Button_pressed", [button.scene_to_load])
-	
+
 func _on_Button_pressed(scene_to_load):
 	get_tree().change_scene(scene_to_load)
-	
+
 var MOUSE_SENSITIVITY = 0.005
 
 func _input(event):
@@ -20,4 +20,3 @@ func _input(event):
 		rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		rotation_helper.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY))
 #		rotation_helper.rotation.x = clamp(rotation_helper.rotation.x, -1.2, 1.2)
-

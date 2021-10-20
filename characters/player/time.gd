@@ -13,5 +13,5 @@ func _process(delta):
 	var minutes = elapsed / 60
 	var seconds = elapsed % 60
 	var str_elapsed = "%02d : %02d" % [minutes, seconds]
-	set_text("Time Elapsed: " + str_elapsed + "\nFPS: " + str(Engine.get_frames_per_second()))
+	set_text("Time Elapsed: " + str_elapsed)
 

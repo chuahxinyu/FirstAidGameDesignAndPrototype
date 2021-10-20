@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/LevelMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/pieces.png" type="Texture" id=2]
@@ -7,6 +7,10 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
 font_data = ExtResource( 5 )
 
 [node name="Control2" type="Control"]
@@ -151,4 +155,15 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 298.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 2 )
+text = "LEVELS"
+__meta__ = {
+"_edit_use_anchors_": false
 }

@@ -5,15 +5,17 @@ const GRAVITY = -24.8
 var vel = Vector3()
 var dir = Vector3()
 const MAX_SPEED = 10
-const SPRINT_SPEED = 20
-const SLOW_SPEED = 5
 const ACCEL = 4.5
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
 
 var MOUSE_SENSITIVITY = 0.05
 
-# Interactio variables
+# Slow
+var is_slow = false
+const SLOW_SPEED = 5
+
+# Interaction variables
 var interaction_ray
 var carried_object = null
 
@@ -22,7 +24,7 @@ var camera
 var rotation_helper
 
 # Toggle extra information
-var show_extra = true
+var show_extra = false
 var extra_text
 
 # Toggle controls information
@@ -30,6 +32,22 @@ var show_controls = false
 
 # Toggle crouching
 var is_crouching = false
+
+# Quests
+var quests = {
+#	"Name": [subquest1_complete?, subquest2_complete?]
+	"Danger": false,			# stop bus
+	"Response": false,		# 
+	"Airway": false,			# head tilt chin lift
+	"Breathing": false,		# determine breathing
+	"CallForHelp": false,	# 
+	"Circulation": false		# CPR
+}
+
+# Extra info
+var extra_info = {
+	
+}
 
 func _ready():
 	camera = $Rotation_Helper/Camera
@@ -43,8 +61,14 @@ func _process(_delta):
 		var object = interaction_ray.get_collider()
 		if object.has_method("pick_up"):
 			$HUD/interaction_text.set_text("[F] Pick up " + object.get_name())
-		elif object.has_method("interact"):
-			$HUD/interaction_text.set_text("[E] Interact with " + object.get_name())
+		elif object.has_method("interact_1"):
+			var text = ""
+			for i in object.interaction_text:
+				text += i
+				text += "\n"
+			$HUD/interaction_text.set_text(text)
+		elif object.has_method("show_information"):
+			$HUD/interaction_text.set_text("[Q] Show more information")
 		else:
 			$HUD/interaction_text.set_text("")
 	else:
@@ -60,6 +84,11 @@ func _process(_delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		$HUD/Controls.hide()
+	
+	# Deciding which quests to show/hide
+	for key in quests.keys():
+		if quests[key]:
+			$"HUD/Checklist/VBoxContainer/DangerQuest/1".is_complete = true
 
 func _physics_process(delta):
 	process_input(delta)
@@ -118,14 +147,33 @@ func process_input(_delta):
 				object.pick_up(self)
 	
 	# Interact with items ------------------------------------------------------
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact_1"):
 		if interaction_ray.is_colliding():
 			var object = interaction_ray.get_collider()
-			if object.has_method("interact"):
-				object.interact(self)
+			if object.has_method("interact_1"):
+				object.interact_1(self)
+	if Input.is_action_just_pressed("interact_2"):
+		if interaction_ray.is_colliding():
+			var object = interaction_ray.get_collider()
+			if object.has_method("interact_2"):
+				object.interact_2(self)
+	if Input.is_action_just_pressed("interact_3"):
+		if interaction_ray.is_colliding():
+			var object = interaction_ray.get_collider()
+			if object.has_method("interact_3"):
+				object.interact_3(self)
+	if Input.is_action_just_pressed("interact_4"):
+		if interaction_ray.is_colliding():
+			var object = interaction_ray.get_collider()
+			if object.has_method("interact_4"):
+				object.interact_4(self)
 	
 	# Show/Hide Extra Text -----------------------------------------------------
 	if Input.is_action_just_pressed("show_extra_text"):
+		if interaction_ray.is_colliding():
+			var object = interaction_ray.get_collider()
+			if object.has_method("show_information"):
+				$HUD/ExtraText/MarginContainer/ExtraTextLabel.set_bbcode(object.information)
 		show_extra = !show_extra
 		
 	# Show/Hide Controls - -----------------------------------------------------
@@ -147,7 +195,10 @@ func process_movement(delta):
 	hvel.y = 0
 	
 	var target = dir
-	target *= MAX_SPEED
+	if is_slow:
+		target *= SLOW_SPEED
+	else:
+		target *= MAX_SPEED
 	
 	var accel
 	if dir.dot(hvel) > 0:
@@ -172,6 +223,11 @@ func _input(event):
 		camera_rot.x = clamp(camera_rot.x, -80, 80)
 		rotation_helper.rotation_degrees = camera_rot
 
-
 func _on_crouch_animation_finished(anim_name):
-	is_crouching = !is_crouching
+	if anim_name == "crouch":
+		is_crouching = !is_crouching
+	if anim_name == "shake" and is_slow:
+		$AnimationPlayer.play("shake")
+
+func end_level(end_message_index):
+	get_tree().change_scene("res://levels/LevelEnd.tscn")

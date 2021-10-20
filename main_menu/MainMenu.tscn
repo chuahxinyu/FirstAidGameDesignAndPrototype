@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/models/main_menu.gltf" type="PackedScene" id=1]
 [ext_resource path="res://main_menu/Camera.gd" type="Script" id=2]
 [ext_resource path="res://main_menu/QuitButton.gd" type="Script" id=3]
-[ext_resource path="res://main_menu/HBoxContainer.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/HinaMincho-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://main_menu/MenuButton.gd" type="Script" id=6]
 
@@ -14,6 +13,10 @@ albedo_color = Color( 0.286275, 0.0745098, 0.0745098, 0.921569 )
 material = SubResource( 1 )
 size = Vector3( 50, 50, 0.1 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 5 )
+
 [sub_resource type="DynamicFont" id=4]
 size = 30
 font_data = ExtResource( 5 )
@@ -22,11 +25,7 @@ font_data = ExtResource( 5 )
 size = 30
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 30
-font_data = ExtResource( 5 )
-
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=6]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 2 )
@@ -63,7 +62,6 @@ anchor_right = 0.95
 anchor_bottom = 0.85
 custom_constants/separation = 100
 alignment = 1
-script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -73,7 +71,7 @@ margin_right = 317.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "Start"
 script = ExtResource( 6 )
 __meta__ = {
@@ -87,7 +85,7 @@ margin_right = 734.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Options"
 script = ExtResource( 6 )
 scene_to_load = "res://options/Options.tscn"
@@ -98,7 +96,7 @@ margin_right = 1152.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Quit"
 script = ExtResource( 3 )
 
@@ -115,7 +113,7 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="MarginContainer"]
 margin_right = 1280.0
 margin_bottom = 14.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_right = 1280.0
