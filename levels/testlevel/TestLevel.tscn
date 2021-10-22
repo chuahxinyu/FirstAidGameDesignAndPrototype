@@ -1,0 +1,220 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/textures/dark_texture_01.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/green_texture_01.png" type="Texture" id=2]
+[ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/RadMatt.3DFPP/Test_Objects/door/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/RadMatt.3DFPP/Test_Objects/pickable/pickup_ball.tscn" type="PackedScene" id=5]
+[ext_resource path="res://interactive_objects/InteractDot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://interactive_objects/InformationDot.gd" type="Script" id=7]
+[ext_resource path="res://levels/level1/CheckTime.gd" type="Script" id=8]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 100, 0.5, 100 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 100, 100, 0.5 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 50, 0.5, 50 )
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 6, 6, 6 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 3, 3, 3 )
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 10, 0.5, 50 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 100, 100, 0.5 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 5, 0.25, 25 )
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 0.5, 15, 50 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.25, 7.5, 25 )
+
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.598425, 0.60494, 0.62894 )
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 0, 1, 0.0431373, 1 )
+emission_enabled = true
+emission = Color( 0, 1, 0.0431373, 1 )
+emission_energy = 5.0
+emission_operator = 0
+emission_on_uv2 = false
+distance_fade_mode = 1
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 5.0
+
+[sub_resource type="SphereMesh" id=14]
+material = SubResource( 13 )
+radius = 0.5
+height = 1.0
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 0.598425, 0.60494, 0.62894 )
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 0, 1, 0.0431373, 1 )
+emission_enabled = true
+emission = Color( 0, 1, 0.0431373, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CubeMesh" id=17]
+material = SubResource( 16 )
+size = Vector3( 1, 1, 1 )
+
+[node name="TestLevel" type="Spatial"]
+
+[node name="Floor" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="Cube2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.59055, -1.90835, 6.95935 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Cube2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Cube2/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Cube" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.41559, -4.93531 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Cube"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Cube/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.484214, 0, -0.87495, 0, 1, 0, 0.87495, 0, -0.484214, -5.45272, 0, 12.9393 )
+
+[node name="Ball" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9467, 6.74196, 5.36907 )
+
+[node name="Door" parent="." instance=ExtResource( 4 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 16.2189 )
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="InteractDot" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61732, 1.16977, 6.21017 )
+
+[node name="Spatial2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.4698, 0, 0 )
+
+[node name="Floor" type="MeshInstance" parent="Spatial2"]
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="Spatial2/Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial2/Floor/StaticBody"]
+shape = SubResource( 9 )
+
+[node name="LeftWall" type="MeshInstance" parent="Spatial2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.22595, -0.365187, -0.0549097 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="Spatial2/LeftWall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial2/LeftWall/StaticBody"]
+shape = SubResource( 11 )
+
+[node name="RightWall" type="MeshInstance" parent="Spatial2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16299, -0.365187, -0.0549097 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="Spatial2/RightWall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial2/RightWall/StaticBody"]
+shape = SubResource( 11 )
+
+[node name="FrontWall" type="MeshInstance" parent="Spatial2"]
+transform = Transform( -0.00338594, 0, -0.999994, 0, 1, 0, 0.999994, 0, -0.00338594, 2.10112, -0.365187, 18.2175 )
+visible = false
+mesh = SubResource( 10 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="Spatial2/FrontWall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial2/FrontWall/StaticBody"]
+shape = SubResource( 11 )
+
+[node name="BackWall" type="MeshInstance" parent="Spatial2"]
+transform = Transform( 0.00155337, 0, 0.999999, 0, 1, 0, -0.999999, 0, 0.00155337, 2.19392, -0.365187, -19.9648 )
+visible = false
+mesh = SubResource( 10 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="Spatial2/BackWall"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial2/BackWall/StaticBody"]
+shape = SubResource( 11 )
+
+[node name="Floor2" type="MeshInstance" parent="Spatial2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.05104, 0 )
+visible = false
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="Spatial2/Floor2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Spatial2/Floor2/StaticBody"]
+shape = SubResource( 9 )
+
+[node name="Button1" type="Spatial" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 26.4196, 5.51304, -2.28823 )
+
+[node name="InterativeDot" type="StaticBody" parent="Button1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19.1017, 0 )
+script = ExtResource( 8 )
+id = 1
+
+[node name="CollisionShape" type="CollisionShape" parent="Button1/InterativeDot"]
+shape = SubResource( 12 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Button1/InterativeDot"]
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="Information1" type="Spatial" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 27.0655, 3.52354, 19.5779 )
+
+[node name="InformationDot" type="StaticBody" parent="Information1"]
+script = ExtResource( 7 )
+show = true
+
+[node name="CollisionShape" type="CollisionShape" parent="Information1/InformationDot"]
+shape = SubResource( 15 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Information1/InformationDot"]
+mesh = SubResource( 17 )
+material/0 = null
+
+[editable path="Ball"]

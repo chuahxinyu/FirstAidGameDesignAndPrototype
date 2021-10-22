@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/fonts/Kreon-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/HinaMincho-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/Kreon-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/SpecialElite-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/fonts/Teko-Bold.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/textures/pieces.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.235294, 0.0156863, 0.0156863, 0.913725 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 25
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 100
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 25
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+font_data = ExtResource( 5 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="."]
+margin_left = 70.0
+margin_top = 16.0
+margin_right = 1203.0
+margin_bottom = 169.0
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/bold_italics_font = SubResource( 3 )
+custom_fonts/italics_font = SubResource( 4 )
+custom_fonts/bold_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[b][i]CONTROLS[/i][/b]"
+text = "CONTROLS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShardsMarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shards Texture" type="TextureRect" parent="ShardsMarginContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BodyMarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.05
+anchor_top = 0.185
+anchor_right = 0.95
+anchor_bottom = 0.95
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Body" type="RichTextLabel" parent="BodyMarginContainer"]
+margin_right = 1152.0
+margin_bottom = 550.0
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/bold_italics_font = SubResource( 7 )
+custom_fonts/italics_font = SubResource( 4 )
+custom_fonts/bold_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[table=3]
+[cell][code][u]Key[/u][/code][/cell][cell]					[/cell][cell][u]Function[/u][/cell]
+[/table]
+[b][i]SHOWING/HIDING[/i][/b]
+[table=3]
+[cell][code]T[/code][/cell][cell]					[/cell][cell]show/hide controls[/cell]
+[cell][code]Esc[/code][/cell][cell]				[/cell][cell]show/hide cursor[/cell]
+[/table]
+[b][i]MOVEMENT[/i][/b]
+[table=3]
+[cell][code]W[/code][/cell][cell]						[/cell][cell]move forward[/cell]
+[cell][code]A[/code][/cell][cell]						[/cell][cell]move left[/cell]
+[cell][code]S[/code][/cell][cell]						[/cell][cell]move backward[/cell]
+[cell][code]D[/code][/cell][cell]						[/cell][cell]move right[/cell]
+[/table]
+[b][i]INTERACTING[/i][/b]
+[table=3]
+[cell][code]1[/code][/cell][cell]						[/cell][cell]interaction option 1[/cell]
+[cell][code]2[/code][/cell][cell]						[/cell][cell]interaction option 2[/cell]
+[cell][code]3[/code][/cell][cell]						[/cell][cell]interaction option 3[/cell]
+[cell][code]4[/code][/cell][cell]						[/cell][cell]interaction option 4[/cell]
+[/table]"
+text = "Key					Function
+SHOWING/HIDING
+T					show/hide controlsEsc				show/hide cursor
+MOVEMENT
+W						move forwardA						move leftS						move backwardD						move right
+INTERACTING
+1						interaction option 12						interaction option 23						interaction option 34						interaction option 4"
+__meta__ = {
+"_edit_use_anchors_": false
+}

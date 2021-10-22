@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/fonts/Kreon-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/HinaMincho-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/Kreon-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/SpecialElite-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/fonts/Teko-Bold.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://main_menu/LevelBox.gd" type="Script" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.188235, 0.0509804, 0.0509804, 0.721569 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 20
+font_data = ExtResource( 3 )
+
+[node name="BasicTutorial" type="MarginContainer"]
+anchor_left = 0.074
+anchor_top = 0.467
+anchor_right = 0.225
+anchor_bottom = 0.657
+margin_left = -14.2182
+margin_right = -0.218231
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+margin_right = 207.0
+margin_bottom = 136.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 207.0
+margin_bottom = 136.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 45.0
+margin_right = 197.0
+margin_bottom = 90.0
+size_flags_vertical = 4
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/bold_italics_font = SubResource( 3 )
+custom_fonts/italics_font = SubResource( 4 )
+custom_fonts/bold_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center][b][i]TUTORIAL[/i][/b]"
+text = "TUTORIAL"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

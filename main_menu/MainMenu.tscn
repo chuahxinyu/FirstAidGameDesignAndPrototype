@@ -1,0 +1,217 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/models/main_menu.gltf" type="PackedScene" id=1]
+[ext_resource path="res://main_menu/Camera.gd" type="Script" id=2]
+[ext_resource path="res://main_menu/QuitButton.gd" type="Script" id=3]
+[ext_resource path="res://assets/textures/AnatomyBackground1.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/HinaMincho-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://main_menu/MenuButton.gd" type="Script" id=6]
+[ext_resource path="res://assets/textures/pieces.png" type="Texture" id=7]
+[ext_resource path="res://assets/fonts/Kreon-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/fonts/SpecialElite-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://assets/fonts/Teko-Bold.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/fonts/Kreon-Bold.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Transition.tscn" type="PackedScene" id=12]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 0.211765, 0, 0, 1 )
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 2, 2, 2 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 50, 50, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 1, 0.721569, 0.721569, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
+size = Vector3( 50, 50, 0.1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+
+[sub_resource type="DynamicFont" id=9]
+size = 20
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 24
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 20
+font_data = ExtResource( 8 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Model" parent="." instance=ExtResource( 1 )]
+
+[node name="background" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.295354, -5.15921 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="background2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.295354, -8.79663 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24063, -1.63054, 0 )
+light_energy = 1.52
+spot_angle = 68.7667
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81753, 2.35535, 0 )
+omni_range = 5.6719
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+light_color = Color( 1, 0.960784, 0, 1 )
+light_energy = 2.61
+
+[node name="Rotation_Helper" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.488, 3.611 )
+
+[node name="Camera" type="Camera" parent="Rotation_Helper"]
+
+[node name="MenuButtons" type="HBoxContainer" parent="."]
+visible = false
+anchor_left = 0.05
+anchor_top = 0.75
+anchor_right = 0.95
+anchor_bottom = 0.85
+custom_constants/separation = 100
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="MenuButtons"]
+margin_right = 317.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 5 )
+text = "Start"
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+scene_to_load = "res://levels/LevelMenu.tscn"
+
+[node name="OptionsButton" type="Button" parent="MenuButtons"]
+margin_left = 417.0
+margin_right = 734.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 6 )
+text = "Options"
+script = ExtResource( 6 )
+scene_to_load = "res://options/Options.tscn"
+
+[node name="QuitButton" type="Button" parent="MenuButtons"]
+margin_left = 834.0
+margin_right = 1152.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 7 )
+text = "Quit"
+script = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+margin_right = 1280.0
+margin_bottom = 14.0
+custom_styles/panel = SubResource( 8 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+margin_right = 1280.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer"]
+margin_right = 1280.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -640.0
+margin_top = -51.0
+margin_right = 640.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExtraTextLabel" type="RichTextLabel" parent="MarginContainer2"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 41.0
+custom_fonts/mono_font = SubResource( 9 )
+custom_fonts/bold_italics_font = SubResource( 10 )
+custom_fonts/italics_font = SubResource( 11 )
+custom_fonts/bold_font = SubResource( 12 )
+custom_fonts/normal_font = SubResource( 13 )
+bbcode_enabled = true
+bbcode_text = "[center][i]press [code][SPACE][/code] to continue[/i][/center]"
+text = "press [SPACE] to continue"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Transition" parent="." instance=ExtResource( 12 )]
+
+[connection signal="faded_out" from="Transition" to="." method="_on_Transition_faded_out"]
