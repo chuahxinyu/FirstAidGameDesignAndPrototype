@@ -1,7 +1,7 @@
 # Mac Prototype Installation Instructions
 
 ## 0. Install `First Aid Game Prototype.zip`
-* 
+* https://github.com/chuahxinyu/FirstAidGameDesignAndPrototype/releases/download/prototype/FirstAidGamePrototype-Mac.zip
 ## 1. Open you `Downloads` folder
 * double click the `.zip` file
 ![](/doc_images/Step1.jpeg)
