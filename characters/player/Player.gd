@@ -34,29 +34,109 @@ var show_controls = false
 var is_crouching = false
 
 # Quests
-var quests = {
-#	"Name": [subquest1_complete?, subquest2_complete?]
-	"Danger": false,			# stop bus
-	"Response": false,		# 
-	"Airway": false,			# head tilt chin lift
-	"Breathing": false,		# determine breathing
-	"CallForHelp": false,	# 
-	"Circulation": false		# CPR
-}
+#var quests = {
+##	"Name": [subquest1_complete?, subquest2_complete?]
+#	"Danger": false,		# stop bus
+#	"Response": false,		# 
+#	"Airway": false,		# head tilt chin lift
+#	"Breathing": false,		# determine breathing
+#	"CallForHelp": false,	# 
+#	"Circulation": false	# CPR
+#}
 
 # Extra info
 var extra_info = {
+	0: "Welcome aboard to the first (and only) level of FIRST AID: the game prototype (and design). This prototype will primarily focus on gameplay, mechanics and be a proof of concept for what the actual game could be - so literally everything you see is a 'placeholder object'.",
+	1: "[i][Voice] You: Great, looks like I'm going to be late again. Can this train go any faster...[/i]",
+	2: "[i][SFX] Thud.\n[Voice] You: Did you hear that? Sounds like someone fell or something, somewhere at the back.[/i]",
+	3: "[i][Voice] You: Woah, it's kind of dangerous to move around the tram while it's still moving...[/i]",
+	4: "Unfortunately, the game prototype basically ends here, after viewing the patient, there are actions that you can take in order to"
+}
+
+# Cues
+var cues = {
 	
+}
+
+const GROUP = 0
+const TASKS = 1
+const MESSAGE = 0
+const IS_COMPLETE = 1
+
+# Checklist
+var checklist = {
+	"Controls":
+		[["Use your mouse to look around and hover the crosshair over the green cube.", false],
+		["Press [code][T][/code] to show the controls menu.", false],
+		["Check what time it is. Hover the crosshair over the small green circle.", false]],
+	"Danger":
+		[["Ensure that the situation is safe for [b]you[/b], bystanders and the patient.", false],
+		["", false],
+		["", false]],
+	"Response":
+		[["Determine the patient's response level.", false],
+		["", false],
+		["", false]],
+	"Airway":
+		[["Open the patient's airway (head tilt/chin lift).", false],
+		["", false],
+		["", false]],
+	"Breathing":
+		[["Determine if the patient is breathing.", false],
+		["", false],
+		["", false]],
+	"Call for help":
+		[["Call emergency services.", false],
+		["", false],
+		["", false]],
+	"Circulation":
+		[["Ensure that blood is still circulating through the patient's body.", false],
+		["", false],
+		["", false]]
 }
 
 func _ready():
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
 	interaction_ray = $Rotation_Helper/InteractionRay
-	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(_delta):
+	# Checklist
+	for key in checklist.keys():
+		$HUD/Checklist/VBoxContainer/Group/Text.set_bbcode(key)
+		var break_flag = false
+
+		if checklist[key][0][IS_COMPLETE] == false:
+			$HUD/Checklist/VBoxContainer/Quest1.message = checklist[key][0][MESSAGE]
+			$HUD/Checklist/VBoxContainer/Quest1.is_complete = false
+			break_flag = true
+		elif checklist[key][0][IS_COMPLETE] == true:
+			$HUD/Checklist/VBoxContainer/Quest1.message = checklist[key][0][MESSAGE]
+			$HUD/Checklist/VBoxContainer/Quest1.is_complete = true
+
+		if checklist[key][1][IS_COMPLETE] == false:
+			$HUD/Checklist/VBoxContainer/Quest2.message = checklist[key][1][MESSAGE]
+			$HUD/Checklist/VBoxContainer/Quest2.is_complete = false
+			break_flag = true
+		elif checklist[key][1][IS_COMPLETE] == true:
+			$HUD/Checklist/VBoxContainer/Quest2.message = checklist[key][1][MESSAGE]
+			$HUD/Checklist/VBoxContainer/Quest2.is_complete = true
+
+		if checklist[key][2][IS_COMPLETE] == false:
+			$HUD/Checklist/VBoxContainer/Quest3.message = checklist[key][2][MESSAGE]
+			$HUD/Checklist/VBoxContainer/Quest3.is_complete = false
+			break_flag = true
+		elif checklist[key][2][IS_COMPLETE] == true:
+			$HUD/Checklist/VBoxContainer/Quest3.message = checklist[key][2][MESSAGE]
+			$HUD/Checklist/VBoxContainer/Quest3.is_complete = true
+		if break_flag:
+			break
+
+	if $"HUD/FPSAndTime/MarginContainer/fps and time".minutes == 10:
+		pass
+	if $"HUD/FPSAndTime/MarginContainer/fps and time".seconds == 15:
+		pass
 	if interaction_ray.is_colliding():
 		var object = interaction_ray.get_collider()
 		if object.has_method("pick_up"):
@@ -67,28 +147,23 @@ func _process(_delta):
 				text += i
 				text += "\n"
 			$HUD/interaction_text.set_text(text)
-		elif object.has_method("show_information"):
-			$HUD/interaction_text.set_text("[Q] Show more information")
+		elif object.has_method("show_information") and object.show == true:
+			$HUD/ExtraText.show()
+			$HUD/ExtraText/MarginContainer/ExtraTextLabel.set_bbcode(extra_info[object.id])
+			if object.id == 0:
+				checklist["Controls"][0][IS_COMPLETE] = true
 		else:
+			$HUD/ExtraText.hide()
 			$HUD/interaction_text.set_text("")
-	else:
-			$HUD/interaction_text.set_text("")
-	
-	if show_extra:
-		$HUD/ExtraText.show()
 	else:
 		$HUD/ExtraText.hide()
-		
+		$HUD/interaction_text.set_text("")
+	
 	if show_controls:
 		$HUD/Controls.show()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		$HUD/Controls.hide()
-	
-	# Deciding which quests to show/hide
-	for key in quests.keys():
-		if quests[key]:
-			$"HUD/Checklist/VBoxContainer/DangerQuest/1".is_complete = true
 
 func _physics_process(delta):
 	process_input(delta)
@@ -150,6 +225,9 @@ func process_input(_delta):
 	if Input.is_action_just_pressed("interact_1"):
 		if interaction_ray.is_colliding():
 			var object = interaction_ray.get_collider()
+			if object.has_method("show_information") and !object.show:
+				$HUD/ExtraText.show()
+				$HUD/ExtraText/MarginContainer/ExtraTextLabel.set_bbcode(extra_info[object.id])
 			if object.has_method("interact_1"):
 				object.interact_1(self)
 	if Input.is_action_just_pressed("interact_2"):
@@ -157,27 +235,33 @@ func process_input(_delta):
 			var object = interaction_ray.get_collider()
 			if object.has_method("interact_2"):
 				object.interact_2(self)
+			if object.has_method("show_information") and !object.show:
+				$HUD/ExtraText/MarginContainer/ExtraTextLabel.set_bbcode(extra_info[object.id])
 	if Input.is_action_just_pressed("interact_3"):
 		if interaction_ray.is_colliding():
 			var object = interaction_ray.get_collider()
 			if object.has_method("interact_3"):
 				object.interact_3(self)
+			if object.has_method("show_information") and !object.show:
+				$HUD/ExtraText/MarginContainer/ExtraTextLabel.set_bbcode(extra_info[object.id])
 	if Input.is_action_just_pressed("interact_4"):
 		if interaction_ray.is_colliding():
 			var object = interaction_ray.get_collider()
 			if object.has_method("interact_4"):
 				object.interact_4(self)
+			if object.has_method("show_information") and !object.show:
+				$HUD/ExtraText/MarginContainer/ExtraTextLabel.set_bbcode(extra_info[object.id])
 	
 	# Show/Hide Extra Text -----------------------------------------------------
 	if Input.is_action_just_pressed("show_extra_text"):
 		if interaction_ray.is_colliding():
 			var object = interaction_ray.get_collider()
-			if object.has_method("show_information"):
-				$HUD/ExtraText/MarginContainer/ExtraTextLabel.set_bbcode(object.information)
+			
 		show_extra = !show_extra
 		
 	# Show/Hide Controls - -----------------------------------------------------
 	if Input.is_action_just_pressed("show_controls"):
+		checklist["Controls"][1][IS_COMPLETE] = true
 		show_controls = !show_controls
 		if show_controls == false:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

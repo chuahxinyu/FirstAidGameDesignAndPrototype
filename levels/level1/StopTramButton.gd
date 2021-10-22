@@ -11,6 +11,6 @@ func _ready():
 #	pass
 
 func interact_1(relate):
-	$"../../Player".quests["Danger"] = true
+	$"../../Player".checklist["Danger"][0][1] = true
 	$"../../Player".is_slow = false
 	print("Stopping the tram!")

@@ -9,13 +9,10 @@ func _ready():
 #	pass
 
 func _on_SlowArea1_body_entered(body):
-	if body == $Player and !$Player.quests["Danger"]:
+	if body == $Player and !$Player.checklist["Danger"][0][1]:
 		$Player.is_slow = true
 		$Player/AnimationPlayer.play("shake")
-		print("entered slowarea1")
 
 func _on_SlowArea2_body_entered(body):
-	if body == $Player and !$Player.quests["Danger"]:
+	if body == $Player and !$Player.checklist["Danger"][0][1]:
 		$Player.end_level(0)
-		print("entered slowarea2")
-

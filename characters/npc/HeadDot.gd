@@ -8,16 +8,19 @@ func _ready():
 	pass # Replace with function body.
 
 func interact_1(relate):
-	if second_time:
+	if second_time:		# check for breathing
 		pass
 	else:
-		pass
+		interaction_text = ["[1] check for breathing", "[2] give rescue breaths"]
+
 func interact_2(relate):
 	if second_time:
 		pass
 	else:
 		pass
+
 func interact_3(relate):
 	pass
+
 func interact_4(relate):
 	pass

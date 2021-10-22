@@ -1,6 +1,7 @@
 extends StaticBody
 
-var information = "[b][i][u]THE MORE INFORMATION BOX[/u][/i][/b]"
+export(bool) var show
+export(int) var id
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

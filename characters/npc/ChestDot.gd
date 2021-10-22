@@ -7,5 +7,6 @@ func _ready():
 	pass # Replace with function body.
 
 func interact_1(relate):
-	$"../../../Player/HUD/ChestCompressions".show()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+#	$"../../../Player/HUD/ChestCompressions".show()
+#	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	pass

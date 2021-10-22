@@ -1,18 +1,17 @@
-extends ScrollContainer
+extends Control
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var show_extra = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for button in $Control.get_children():
-		button.connect("pressed", self, "_on_Button_pressed", [button.scene_to_load])
-	
-func _on_Button_pressed(scene_to_load):
-	get_tree().change_scene(scene_to_load)
+	pass # Replace with function body.
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_just_pressed("show_extra_text"):
+		show_extra = !show_extra
+		if show_extra:
+			$ExtraText.show()
+		else:
+			$ExtraText.hide()

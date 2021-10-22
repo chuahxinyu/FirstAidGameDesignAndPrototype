@@ -17,3 +17,5 @@ func _process(delta):
 		$Quest.set_bbcode("[color=green][x] " + message+"[/color]")
 	else:
 		$Quest.set_bbcode("[ ] " + message)
+	if message == "":
+		self.hide()
