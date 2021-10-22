@@ -46,11 +46,11 @@ var is_crouching = false
 
 # Extra info
 var extra_info = {
-	0: "Welcome aboard to the first (and only) level of FIRST AID: the game prototype (and design). This prototype will primarily focus on gameplay, mechanics and be a proof of concept for what the actual game could be - so literally everything you see is a 'placeholder object'.",
+	0: "Welcome aboard to the first (and only) level of FIRST AID: the game prototype (and design). This prototype will primarily focus on gameplay, mechanics and be a proof of concept for what the actual game could be - so literally everything you see is a 'placeholder object'. Green cubes tell you more about the game design while green spheres give visual/audio cues that could not be added in the prototype due to lack of technical expertise. ",
 	1: "[i][Voice] You: Great, looks like I'm going to be late again. Can this train go any faster...[/i]",
 	2: "[i][SFX] Thud.\n[Voice] You: Did you hear that? Sounds like someone fell or something, somewhere at the back.[/i]",
 	3: "[i][Voice] You: Woah, it's kind of dangerous to move around the tram while it's still moving...[/i]",
-	4: "Unfortunately, the game prototype basically ends here, after viewing the patient, there are actions that you can take in order to"
+	4: "Unfortunately, the game prototype basically ends here, after viewing the patient, there are actions that you can take in order to help them out (you can hover over the green dots) and learn how to do a primary survey of a patient (DR.ABC: Danger, Reponsonse, Airway, Breathing, Call for help, Circulation) with mechanics similar to the game pitch (chest compressions and breaths) but with NPCs and more options."
 }
 
 # Cues

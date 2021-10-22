@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/fonts/Kreon-Light.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://characters/player/time.gd" type="Script" id=10]
 [ext_resource path="res://other_menus/Controls.tscn" type="PackedScene" id=11]
-[ext_resource path="res://characters/player/FPS.gd" type="Script" id=12]
+[ext_resource path="res://characters/player/fps.gd" type="Script" id=12]
 [ext_resource path="res://characters/player/ChestCompressionsUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/fonts/Teko-SemiBold.ttf" type="DynamicFontData" id=14]
 

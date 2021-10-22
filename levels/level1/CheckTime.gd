@@ -2,7 +2,7 @@ extends StaticBody
 
 export(bool) var show
 export(int) var id
-var interaction_text = ["[1] interaction 1", "[2] interaction 2"]
+var interaction_text = ["[1] check time"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

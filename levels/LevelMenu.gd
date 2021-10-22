@@ -15,3 +15,7 @@ func _process(delta):
 			$ExtraText.show()
 		else:
 			$ExtraText.hide()
+
+
+func _on_StartButton_pressed():
+	get_tree().change_scene("res://levels/level1/Level1.tscn")
